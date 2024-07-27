@@ -1,0 +1,11 @@
+{
+  "name": "hto",
+  "main": "src/main.js",
+  "dependencies": {
+    "clipboardy": "^4.0.0",
+    "dotenv": "^16.4.5",
+    "inquirer": "^10.0.4",
+    "openai": "^4.52.7",
+    "yargs": "^17.7.2"
+  }
+}
