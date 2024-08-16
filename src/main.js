@@ -5,6 +5,7 @@ import {
   copyToClipboard,
   executeShellCommand,
 } from "./util.js";
+
 import { getChatResponse } from "./openaiClient.js";
 
 /**

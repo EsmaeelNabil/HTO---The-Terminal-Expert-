@@ -71,6 +71,7 @@ export function copyToClipboard(content) {
 }
 
 export function executeShellCommand(command) {
+  console.log(`Executing command: ${command}`);
   exec(command, (error, stdout, stderr) => {
     if (error) {
       console.error(`Error executing command: ${error}`);
