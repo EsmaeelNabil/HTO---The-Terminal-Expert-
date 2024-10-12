@@ -1,5 +1,11 @@
-import {readFileSync} from "fs";
-import {load} from "js-yaml";
+import { readFileSync } from "fs";
+import { load } from "js-yaml";
+
+const os = require("os");
+const path = require("path");
+
+// Define the path to the .config file
+const configFilePath = path.join(os.homedir(), ".config/hto/", "config.yaml");
 
 /**
  * Read a YAML file and parse it into a JavaScript object.
@@ -16,4 +22,4 @@ export function readYamlFile(filePath) {
   }
 }
 
-export const hto_config = readYamlFile("config.yaml");
+export const hto_config = readYamlFile(configFilePath);

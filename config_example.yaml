@@ -1,3 +1,4 @@
+# move this into .config/hto/config.yaml
 apps:
   terminal_expert:
     defaultModel: 'gpt-4o-mini'
