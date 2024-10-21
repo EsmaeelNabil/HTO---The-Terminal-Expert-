@@ -4,7 +4,6 @@ import { hideBin } from "yargs/helpers"; // Helper for yargs to handle process a
 import inquirer from "inquirer"; // Importing inquirer for user prompts.
 import clipboard from "clipboardy"; // Importing clipboardy for clipboard operations.
 import { exec } from "child_process"; // Importing exec from child_process to execute shell commands.
-import { hto_config } from "./configReader"; // Configuration reader for the application settings.
 import chalk from "chalk"; // Importing chalk for colored console output.
 
 // Load environment variables from a .env file into process.env
@@ -24,7 +23,7 @@ export const args = yargs(hideBin(process.argv))
   .option("model", {
     alias: "m",
     type: "string",
-    default: hto_config.apps.terminal_expert.defaultModel || "gpt-4o-mini",
+    default: "gpt-4o-mini",
     description: "Specify the model to use",
   })
   .option("debug", {
@@ -41,6 +40,12 @@ export const args = yargs(hideBin(process.argv))
     alias: "v",
     type: "boolean",
     description: "Verbose mode",
+  })
+  .option("app", {
+    alias: "a",
+    type: "string",
+    description: "Specify the app to use from .config hto.yaml",
+    default: "terminal_chat",
   })
   .option("execute", {
     alias: "e",
@@ -100,6 +105,15 @@ export function userActionSelector(message) {
 export function copyToClipboard(content) {
   clipboard.writeSync(content);
   console.log(chalk.green("Command copied to clipboard."));
+}
+
+// Trims a string to a specified length and appends an ellipsis if necessary.
+export function trimStringWithEllipsis(str, maxLength) {
+  if (str.length > maxLength) {
+    return str.substring(0, maxLength) + "..";
+  } else {
+    return str;
+  }
 }
 
 // Function to execute a shell command and log the output or errors.
@@ -167,3 +181,23 @@ export async function handleUserActions(command) {
   }
   process.exit(0);
 }
+
+/**
+ * getUserQuery
+ * Retrieves the user query either via an interactive prompt or command line argument.
+ *
+ * @param {boolean} interactiveMode - Flag to determine if the user input should be interactive.
+ * @param {string} commandLineArg - Command line argument provided by the user.
+ * @returns {Promise<string>} - The user's query.
+ */
+export const getUserQuery = async (interactiveMode, commandLineArg) => {
+  if (interactiveMode) {
+    const input = await promptUser("Enter your question");
+    return input.query; // Return the query obtained from the user prompt.
+  } else if (commandLineArg) {
+    return commandLineArg; // Return the query obtained from the command line argument.
+  } else {
+    printHelp(); // Print help information if no query was provided.
+    process.exit(0); // Exit the process with a status code of 0.
+  }
+};

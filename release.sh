@@ -1,30 +1,25 @@
 #!/bin/bash
+APP_NAME=$1
+APP_ENTRY_POINT=$2
 
-# Ensure necessary files exist
-if [ ! -f package.json ]; then
-  echo "package.json not found!"
+if [ -z "$APP_NAME" ]; then
+  echo "Please provide the app name!"
   exit 1
 fi
 
-if [ ! -f src/main.js ]; then
-  echo "src/main.js not found!"
+if [ -z "$APP_ENTRY_POINT" ]; then
+  echo "Please provide the app entry point file path!"
   exit 1
 fi
 
 # Build the pkg executable
-echo "Building started ..."
+echo "Building started for" "$APP_NAME" "..."
 echo "-----------------------"
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
-  echo "for Linux check https://bun.sh/docs/bundler/executables"
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-  bun build --compile --target=bun-darwin-arm64 src/main.js --outfile hto
-elif [[ "$OSTYPE" == "cygwin" ]]; then
-  echo "for Cygwin (Windows) check https://bun.sh/docs/bundler/executables"
-elif [[ "$OSTYPE" == "msys" ]]; then
-  echo "for MinGW (Windows) check https://bun.sh/docs/bundler/executables"
-elif [[ "$OSTYPE" == "win32" ]]; then
-  echo "for Windows check https://bun.sh/docs/bundler/executables"
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  bun build --compile --target=bun-darwin-arm64 "$APP_ENTRY_POINT" --outfile "$APP_NAME"
 else
-  echo "Unknown OS, check https://bun.sh/docs/bundler/executables"
+  echo "for Linux, MinGW, Cygwin or Windows check https://bun.sh/docs/bundler/executables"
 fi
+
 echo "Excutable generated successfully!"

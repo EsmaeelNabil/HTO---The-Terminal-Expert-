@@ -1,39 +1,17 @@
 import {
   args,
-  promptUser,
-  printHelp,
   logDebug,
-  processCommand,
   logGreen,
+  getUserQuery,
+  processCommand,
 } from "./util.js";
-
 import { getChatResponse } from "./openaiClient.js";
 import { hto_config } from "./configReader.js";
 
 // Extracting specific configurations for the terminal expert application.
 const model = hto_config.apps.terminal_expert.defaultModel;
 const systemMessage = hto_config.apps.terminal_expert.systemMessage;
-
-/**
- * getUserQuery
- * Retrieves the user query either via an interactive prompt or command line argument.
- *
- * @param {boolean} interactiveMode - Flag to determine if the user input should be interactive.
- * @param {string} commandLineArg - Command line argument provided by the user.
- * @returns {Promise<string>} - The user's query.
- */
-const getUserQuery = async (interactiveMode, commandLineArg) => {
-  if (interactiveMode) {
-    const input = await promptUser("Enter your question");
-    return input.query; // Return the query obtained from the user prompt.
-  } else if (commandLineArg) {
-    return commandLineArg; // Return the query obtained from the command line argument.
-  } else {
-    printHelp(); // Print help information if no query was provided.
-    process.exit(0); // Exit the process with a status code of 0.
-  }
-};
-
+const reponseMode = hto_config.apps.terminal_expert.responseMode;
 /**
  * handleResponse
  * Processes the response from the chat API and logs additional information if verbose mode is enabled.
@@ -59,7 +37,9 @@ const handleResponse = async (response, verbose) => {
 const main = async () => {
   try {
     // Log the model and system message being used for debugging purposes.
-    logDebug(`Using model: ${model} \nand systemMessage: ${systemMessage}\n`);
+    logDebug(
+      `Using model: ${model} \nand systemMessage: ${systemMessage}\n and responseMode: ${reponseMode}`,
+    );
 
     // Determine the mode of user input.
     const interactiveMode = args.interactive;
@@ -69,7 +49,12 @@ const main = async () => {
     const userQuery = await getUserQuery(interactiveMode, commandLineArg);
 
     // Get the response from the chat API using the user's query.
-    const response = await getChatResponse(userQuery, model, systemMessage);
+    const response = await getChatResponse(
+      userQuery,
+      model,
+      systemMessage,
+      reponseMode,
+    );
 
     // Handle the response from the chat API.
     await handleResponse(response, args.verbose);

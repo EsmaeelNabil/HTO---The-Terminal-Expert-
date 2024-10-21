@@ -10,6 +10,7 @@
 
 .parcel-cache
 hto
+hto_terminal
 # Next.js build output
 
 .next
