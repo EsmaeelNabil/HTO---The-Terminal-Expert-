@@ -44,7 +44,7 @@ const main = async () => {
       reponseMode,
     );
 
-    logGreen(JSON.stringify(response));
+    logGreen(response);
   } catch (error) {
     // Log the error and exit the process with a status code of 1.
     console.error(`Error occurred: ${error.message}`);
