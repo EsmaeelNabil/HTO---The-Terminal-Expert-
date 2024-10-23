@@ -1,7 +1,6 @@
-<img width="1277" alt="image" src="https://github.com/user-attachments/assets/b984b06b-6506-4031-848a-d68c164d86fe">
+<img width="1512" alt="image" src="https://github.com/user-attachments/assets/e764d88d-2ab8-4024-99e7-ce1779c913ab">
 
-This script helps users query terminal command syntax, interactively decide actions, and even execute terminal commands
-directly. It leverages OpenAI's GPT model to provide accurate and quick command suggestions.
+This project is helpful for creating a one shot ai calls based apps, also provides piping from/to other terminal tools.
 
 ## Features
 
