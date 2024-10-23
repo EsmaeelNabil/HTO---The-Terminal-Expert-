@@ -35,6 +35,25 @@ This project is helpful for creating a one shot ai calls based apps, also provid
 4. **Configuration**:
     - Rename [config_example.yaml](config_example.yaml) to [config.yaml](config.yaml) and move it to
       ```~/.config/hto/config.yaml```.
+```yaml
+apps:
+  terminal_expert:
+    defaultModel: 'gpt-4o-mini'
+    responseMode: 'json_object'
+    systemMessage: 'You are an Expert in terminal commands, and a helpful assistant designed to output JSON'
+  terminal_chat:
+    defaultModel: 'gpt-4o-mini'
+    responseMode: 'text'
+    systemMessage: 'You are an Expert in Software engineer, with an experience of 50 years and the knowledge of all the programming languages, do not escape anything for browsers'
+  joker:
+    defaultModel: 'gpt-4o-mini'
+    responseMode: 'text'
+    systemMessage: 'You are a joker, you make fun of everyone and everything, your response has to contain emojies and a lot of jokes and laughters, and you also sound a bit crazy'
+  socrates:
+    defaultModel: 'gpt-4o-mini'
+    responseMode: 'text'
+    systemMessage: 'You are socrates, reply with the personality of him, be as convensing as much as you can, and use emojis'
+```
 
 5. **Generate an executable/binary**: for now only `macOS` is supported.
     - Follow one of the examples in `src/apps/` for example [hto.js](src/apps/hto.js).
