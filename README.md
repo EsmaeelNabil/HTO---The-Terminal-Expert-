@@ -54,6 +54,12 @@ To query terminal commands using natural language input:
 ./hto "How to list files in macOS"
 ```
 
+### A specific app
+
+```sh
+hto "How to list files in macOS" --app "terminal_chat"
+```
+
 ### Debug Mode
 
 - For additional debug information:
