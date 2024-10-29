@@ -1,4 +1,10 @@
-# Archived and Moved to Rust impl here https://github.com/EsmaeelNabil/h2o
+<br>
+<br>
+
+# 🟡 Archived and Moved to [Rust impl here](https://github.com/EsmaeelNabil/h2o) 🟡
+
+<br>
+<br>
 
 <img width="1512" alt="image" src="https://github.com/user-attachments/assets/e764d88d-2ab8-4024-99e7-ce1779c913ab">
 
